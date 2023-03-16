@@ -1,3 +1,4 @@
+import CardContainer from "../component/CardContainer";
 import React from "react";
 import SearchBar from "../component/SearchBar";
 function Home() {
@@ -5,6 +6,7 @@ function Home() {
     <>
       <SearchBar />
       <h1>Home page</h1>
+      <CardContainer />
     </>
   );
 }
