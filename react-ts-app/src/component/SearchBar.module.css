@@ -1,0 +1,19 @@
+.button {
+  float: right;
+  padding: 6px 10px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.searchContainer {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid gray;
+}
+input[type="text"] {
+  padding: 6px;
+  font-size: 17px;
+  width: 93%;
+  border: none;
+}

@@ -1,12 +1,14 @@
 import React from "react";
-
+import classes from "./SearchBar.module.css";
 class SearchBar extends React.Component {
   render() {
     return (
-      <div>
+      <div className={classes.searchContainer}>
         <div>
           <input type="text" placeholder="Search" />
-          <button type="submit">ss</button>
+          <button className={classes.button} type="submit">
+            ss
+          </button>
         </div>
       </div>
     );
