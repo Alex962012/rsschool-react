@@ -3,9 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { WrappedApp, App } from "./App";
 import { MemoryRouter } from "react-router-dom";
 import React from "react";
-import Card from "./component/Card";
-import SearchBar from "./component/SearchBar";
-import About from "./pages/About";
+
 describe("App", () => {
   it("Renders hello world", () => {
     render(<WrappedApp />);
