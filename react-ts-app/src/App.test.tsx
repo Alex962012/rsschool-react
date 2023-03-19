@@ -60,9 +60,6 @@ describe("Search bar", () => {
 describe("About", () => {
   it("About renders", () => {
     render(<About />);
-    expect(
-    screen.getByText("About")
-    ).toBeInTheDocument();
+    expect(screen.getByText("About")).toBeInTheDocument();
   });
 });
-
