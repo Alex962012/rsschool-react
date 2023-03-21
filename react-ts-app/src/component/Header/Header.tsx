@@ -16,6 +16,12 @@ function Header() {
       >
         About
       </NavLink>
+      <NavLink
+        className={({ isActive }) => (isActive ? `${classes.active}` : "")}
+        to="/form"
+      >
+        Form
+      </NavLink>
     </header>
   );
 }

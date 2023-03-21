@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import cards from "../Cards.json";
+import cards from "../../Cards.json";
 import classes from "./CardContainer.module.css";
 const cardElement = cards.map((el) => (
   <Card title={el.title} price={el.price} img={el.image} key={el.id} />
