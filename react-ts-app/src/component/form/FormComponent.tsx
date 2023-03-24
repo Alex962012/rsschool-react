@@ -1,17 +1,19 @@
 import React from "react";
-import CardForm from "../headerCard/CardForm";
 import MyForm from "./MyForm";
 import Cards from "./Cards";
+import { CardType } from "./FormCard";
 class FormComponent extends React.Component {
 
-      constructor(props:any){
+      constructor(props:{}){
         super(props)
         this.state = { cards: [] };
     }
 
-      addCard(card:any) {
+      addCard(card:CardType) {
+    
         this.setState((prevState:any) => ({
           cards: [...prevState.cards, card]
+          
         }));
       }
 
@@ -19,7 +21,7 @@ class FormComponent extends React.Component {
     render() {
         return (
           <>
-          <MyForm addCard={(card: any) => this.addCard(card)}></MyForm>
+          <MyForm addCard={(card: CardType) => this.addCard(card)}></MyForm>
           <Cards {...this.state}></Cards>
           </>
           );
