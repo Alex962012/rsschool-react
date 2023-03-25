@@ -5,6 +5,8 @@ export  type CardType = {
   description: string;
   deliveryTime: Date;
   price: number; 
+  inputFile:string;
+  selection:string
 };
 
 class FormCard extends React.Component<CardType> {
@@ -15,7 +17,7 @@ class FormCard extends React.Component<CardType> {
         <div>{this.props.title}</div>
         <div>{this.props.description}</div>
         <div>{this.props.price} $</div>
-        <div></div>
+        <div>{this.props.inputFile}</div>
       </div>
     );
   }

@@ -14,11 +14,19 @@ class Cards extends React.Component<any, any> {
   render() {
     const arr = this.props.cards;
     console.log(arr);
-    const newCard = arr.map((el: CardType,index:number) => <Card key={index} title={el.title} description={el.description} price={el.price} deliveryTime={el.deliveryTime}/>);
+    const newCard = arr.map((el: CardType, index: number) => (
+      <Card
+        key={index}
+        title={el.title}
+        description={el.description}
+        price={el.price}
+        deliveryTime={el.deliveryTime}
+        inputFile={el.inputFile}
+        selection={el.selection}
+      />
+    ));
     if (arr.length > 0) {
-      return <div className={classes.cards}>
-        {newCard}
-        </div>;
+      return <div className={classes.cards}>{newCard}</div>;
     }
   }
 }
