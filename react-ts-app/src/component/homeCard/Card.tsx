@@ -4,12 +4,12 @@ import classes from "./Card.module.css";
 type MyProps = {
   key: number;
   title: string;
-  description:string;
-  price:number;
-  deliveryTime:Date;
-  inputFile:string;
-  selection:string;
-  checkbox:any;
+  description: string;
+  price: number;
+  deliveryTime: Date;
+  inputFile: string;
+  selection: string;
+  checkbox: string;
 };
 
 class Card extends React.Component<MyProps> {

@@ -3,7 +3,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
-import Form from './pages/Form'
+import Form from "./pages/Form";
 
 import Layout from "./component/Layout";
 export function App() {

@@ -19,8 +19,21 @@ type StateType = {
   form: boolean;
   validate: boolean;
 };
+type PropsType = {
+  cards: [];
+  title: boolean;
+  description: boolean;
+  deliveryTime: boolean;
+  price: boolean;
+  inputFile: boolean;
+  selection: boolean;
+  checkbox: boolean;
+  radio: boolean;
+  form: boolean;
+  validate: boolean;
+};
 
-class MyForm extends React.Component<undefined, StateType> {
+class MyForm extends React.Component<unknown, StateType> {
   title: React.RefObject<HTMLInputElement> = React.createRef();
   description: React.RefObject<HTMLInputElement> = React.createRef();
   deliveryTime: React.RefObject<HTMLInputElement> = React.createRef();
@@ -32,7 +45,7 @@ class MyForm extends React.Component<undefined, StateType> {
   radio1: React.RefObject<HTMLInputElement> = React.createRef();
   radio2: React.RefObject<HTMLInputElement> = React.createRef();
 
-  constructor(props: any) {
+  constructor(props: PropsType) {
     super(props);
     this.state = {
       cards: [],
@@ -44,7 +57,7 @@ class MyForm extends React.Component<undefined, StateType> {
       selection: true,
       checkbox: true,
       radio: true,
-      form: true,
+      form: false,
       validate: true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -95,18 +108,18 @@ class MyForm extends React.Component<undefined, StateType> {
   }
 
   addCard(card: CardType) {
-    this.setState((prevState: any) => ({
+    this.setState((prevState) => ({
       cards: [...prevState.cards, card],
     }));
   }
 
   allValid() {
-    let validTitle = this.validateTitle();
-    let valideDsecription = this.validateDescription();
-    let valideDeliveryTime = this.validateDeliveryTime();
-    let validePrice = this.validatePrive();
-    let valideCheck = this.validateCheck();
-    let valideRadio = this.validateRadio();
+    const validTitle = this.validateTitle();
+    const valideDsecription = this.validateDescription();
+    const valideDeliveryTime = this.validateDeliveryTime();
+    const validePrice = this.validatePrive();
+    const valideCheck = this.validateCheck();
+    const valideRadio = this.validateRadio();
     if (
       validTitle &&
       valideDsecription &&
@@ -132,12 +145,9 @@ class MyForm extends React.Component<undefined, StateType> {
       : "";
     const selection = this.selection.current?.value;
     const checkbox = this.checkbox.current?.value;
-    const radio1 = this.radio1.current?.value;
-    const radio2 = this.radio2.current?.value;
 
     if (this.allValid()) {
       this.setState({ validate: true });
-      // setTimeout(() => this.setState({ validate: false }), 5000);
       this.addCard({
         title,
         description,
@@ -165,7 +175,7 @@ class MyForm extends React.Component<undefined, StateType> {
         checkbox={el.checkbox}
       />
     ));
-    let res = arr.length > 0 ? newCard : "";
+    const res = arr.length > 0 ? newCard : "";
 
     return (
       <div>
@@ -174,7 +184,6 @@ class MyForm extends React.Component<undefined, StateType> {
           className={classes.form}
           ref={this.form}
         >
-          {/* {this.state.form && <div>data saved</div>} */}
           <InputComponent
             ref={this.title}
             error={this.state.title}
