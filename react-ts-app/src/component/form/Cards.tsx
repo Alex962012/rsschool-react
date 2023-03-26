@@ -23,6 +23,7 @@ class Cards extends React.Component<any, any> {
         deliveryTime={el.deliveryTime}
         inputFile={el.inputFile}
         selection={el.selection}
+        checkbox={el.checkbox}
       />
     ));
     if (arr.length > 0) {

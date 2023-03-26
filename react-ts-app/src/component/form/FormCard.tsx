@@ -6,7 +6,8 @@ export  type CardType = {
   deliveryTime: Date;
   price: number; 
   inputFile:string;
-  selection:string
+  selection:string;
+  checkbox:boolean
 };
 
 class FormCard extends React.Component<CardType> {

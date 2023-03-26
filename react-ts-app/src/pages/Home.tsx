@@ -1,4 +1,4 @@
-import CardContainer from "../component/headerCard/CardContainer";
+import CardContainer from "../component/homeCard/CardContainer";
 import React from "react";
 import SearchBar from "../component/searchBar/SearchBar";
 function Home() {

@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { WrappedApp, App } from "./App";
 import { MemoryRouter } from "react-router-dom";
 import React from "react";
-import Card from "./component/headerCard/Card";
+import Card from "./component/homeCard/Card";
 import SearchBar from "./component/searchBar/SearchBar";
 import About from "./pages/About";
 describe("App", () => {
