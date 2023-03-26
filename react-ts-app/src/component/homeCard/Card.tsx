@@ -4,8 +4,12 @@ import classes from "./Card.module.css";
 type MyProps = {
   key: number;
   title: string;
-  price: number;
-  img: string;
+  description:string;
+  price:number;
+  deliveryTime:Date;
+  inputFile:string;
+  selection:string;
+  checkbox:any;
 };
 
 class Card extends React.Component<MyProps> {
@@ -17,7 +21,7 @@ class Card extends React.Component<MyProps> {
         <div>{this.props.price} $</div>
         <div
           className={classes.img}
-          style={{ backgroundImage: `url(${this.props.img})` }}
+          style={{ backgroundImage: `url(${this.props.inputFile})` }}
         ></div>
       </div>
     );

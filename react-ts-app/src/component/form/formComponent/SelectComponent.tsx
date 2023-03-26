@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 
-
 const SelectComponent = forwardRef<HTMLSelectElement>((props, ref) => (
   <div>
     <label>

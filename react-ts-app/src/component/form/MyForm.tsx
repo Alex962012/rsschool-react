@@ -4,11 +4,23 @@ import classes from "./MyForm.module.css";
 import InputFileComponent from "./formComponent/InputFileComponent";
 import SelectComponent from "./formComponent/SelectComponent";
 import InputRadioComponent from "./formComponent/InputRadioComponent";
-type PropsType = {
-  addCard: (card: any) => void;
+import FormCard, { CardType } from "./FormCard";
+
+type StateType = {
+  cards: CardType[];
+  title: boolean;
+  description: boolean;
+  deliveryTime: boolean;
+  price: boolean;
+  inputFile: boolean;
+  selection: boolean;
+  checkbox: boolean;
+  radio: boolean;
+  form: boolean;
+  validate: boolean;
 };
 
-class MyForm extends React.Component<PropsType> {
+class MyForm extends React.Component<undefined, StateType> {
   title: React.RefObject<HTMLInputElement> = React.createRef();
   description: React.RefObject<HTMLInputElement> = React.createRef();
   deliveryTime: React.RefObject<HTMLInputElement> = React.createRef();
@@ -19,9 +31,93 @@ class MyForm extends React.Component<PropsType> {
   checkbox: React.RefObject<HTMLInputElement> = React.createRef();
   radio1: React.RefObject<HTMLInputElement> = React.createRef();
   radio2: React.RefObject<HTMLInputElement> = React.createRef();
-  constructor(props: PropsType) {
+
+  constructor(props: any) {
     super(props);
+    this.state = {
+      cards: [],
+      title: true,
+      description: true,
+      deliveryTime: true,
+      price: true,
+      inputFile: true,
+      selection: true,
+      checkbox: true,
+      radio: true,
+      form: true,
+      validate: true,
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  validateTitle() {
+    const value = this.title.current?.value;
+    const error = value?.length !== 0 ? true : false;
+    this.setState({ title: error });
+    return error;
+  }
+
+  validateDescription() {
+    const value = this.description.current?.value;
+    const error = value?.length !== 0 ? true : false;
+    this.setState({ description: error });
+    return error;
+  }
+
+  validateDeliveryTime() {
+    const value = this.deliveryTime.current?.value;
+    const error = value?.length !== 0 ? true : false;
+    this.setState({ deliveryTime: error });
+    return error;
+  }
+  validatePrive() {
+    const value = this.price.current?.value;
+    const error = value?.length !== 0 ? true : false;
+    this.setState({ price: error });
+    return error;
+  }
+
+  validateCheck() {
+    const value = this.checkbox.current?.checked;
+    const error = value ? true : false;
+    this.setState({ checkbox: error });
+    return error;
+  }
+  validateRadio() {
+    const value1 = this.radio1.current?.checked;
+    const value2 = this.radio2.current?.checked;
+    let error = false;
+    if (value1 || value2) {
+      error = true;
+    }
+    this.setState({ radio: error });
+    return error;
+  }
+
+  addCard(card: CardType) {
+    this.setState((prevState: any) => ({
+      cards: [...prevState.cards, card],
+    }));
+  }
+
+  allValid() {
+    let validTitle = this.validateTitle();
+    let valideDsecription = this.validateDescription();
+    let valideDeliveryTime = this.validateDeliveryTime();
+    let validePrice = this.validatePrive();
+    let valideCheck = this.validateCheck();
+    let valideRadio = this.validateRadio();
+    if (
+      validTitle &&
+      valideDsecription &&
+      valideDeliveryTime &&
+      validePrice &&
+      valideCheck &&
+      valideRadio
+    ) {
+      this.setState({ form: true });
+      return true;
+    }
   }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -31,52 +127,97 @@ class MyForm extends React.Component<PropsType> {
     const description = this.description.current?.value;
     const deliveryTime = this.deliveryTime.current?.value;
     const price = this.price.current?.value;
-    const inputFile = this.inputFile?.current?.files
+    const inputFile = this.inputFile?.current?.files![0]
       ? URL.createObjectURL(this.inputFile.current?.files[0])
       : "";
     const selection = this.selection.current?.value;
     const checkbox = this.checkbox.current?.value;
     const radio1 = this.radio1.current?.value;
     const radio2 = this.radio2.current?.value;
-    this.props.addCard({
-      title,
-      description,
-      deliveryTime,
-      price,
-      inputFile,
-      selection,
-      checkbox,
-    });
-    this.form.current?.reset();
+
+    if (this.allValid()) {
+      this.setState({ validate: true });
+      // setTimeout(() => this.setState({ validate: false }), 5000);
+      this.addCard({
+        title,
+        description,
+        deliveryTime,
+        price,
+        inputFile,
+        selection,
+        checkbox,
+      });
+      this.form.current?.reset();
+    }
   }
 
   render() {
+    const arr = this.state.cards;
+    const newCard = arr.map((el: CardType, index: number) => (
+      <FormCard
+        key={index}
+        title={el.title}
+        description={el.description}
+        price={el.price}
+        deliveryTime={el.deliveryTime}
+        inputFile={el.inputFile}
+        selection={el.selection}
+        checkbox={el.checkbox}
+      />
+    ));
+    let res = arr.length > 0 ? newCard : "";
+
     return (
-      <form
-        onSubmit={this.handleSubmit}
-        className={classes.form}
-        ref={this.form}
-      >
-        <InputComponent ref={this.title} type="text" text="Title" />
-        <InputComponent ref={this.description} type="text" text="Description" />
-        <InputComponent
-          ref={this.deliveryTime}
-          type="date"
-          text="Receipt time"
-        />
-        <SelectComponent ref={this.selection} />
-        <InputComponent ref={this.price} type="number" text="Price" />
-        <InputComponent
-          ref={this.checkbox}
-          type="checkbox"
-          text="I consent to my personal data"
-        />
-        <InputRadioComponent radio1={this.radio1} radio2={this.radio2} />
-        <InputFileComponent ref={this.inputFile} />
-        <button type="submit" value="Submit">
-          Submit
-        </button>
-      </form>
+      <div>
+        <form
+          onSubmit={this.handleSubmit}
+          className={classes.form}
+          ref={this.form}
+        >
+          {/* {this.state.form && <div>data saved</div>} */}
+          <InputComponent
+            ref={this.title}
+            error={this.state.title}
+            type="text"
+            text="Title"
+          />
+          <InputComponent
+            ref={this.description}
+            type="text"
+            text="Description"
+            error={this.state.description}
+          />
+          <InputComponent
+            ref={this.deliveryTime}
+            type="date"
+            text="Receipt time"
+            error={this.state.deliveryTime}
+          />
+          <SelectComponent ref={this.selection} />
+          <InputComponent
+            ref={this.price}
+            type="number"
+            text="Price"
+            error={this.state.price}
+          />
+          <InputComponent
+            ref={this.checkbox}
+            type="checkbox"
+            text="I consent to my personal data"
+            error={this.state.checkbox}
+          />
+          <InputRadioComponent
+            radio1={this.radio1}
+            radio2={this.radio2}
+            error={this.state.radio}
+          />
+          <InputFileComponent ref={this.inputFile} />
+          <button type="submit" value="Submit">
+            Submit
+          </button>
+        </form>
+        <div className={classes.cardContainer}>{res}</div>
+      </div>
     );
   }
 }

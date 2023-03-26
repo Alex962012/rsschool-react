@@ -1,5 +1,6 @@
 
-import FormComponent from "../component/form/FormComponent";
+// import FormComponent from "../component/form/FormComponent";
+import MyForm from "../component/form/MyForm";
 import React from "react";
 
 function Form() {
@@ -7,7 +8,7 @@ function Form() {
     <>
       
       <h1>Form</h1>
-      <FormComponent></FormComponent>
+      <MyForm/>
     </>
   );
 }
