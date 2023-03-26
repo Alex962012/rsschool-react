@@ -1,0 +1,12 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.error{
+    color: red;
+}
+.cardContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

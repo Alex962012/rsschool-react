@@ -1,0 +1,21 @@
+.header {
+  background-color: rgb(75, 81, 81);
+  display: flex;
+  justify-content: center;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 10px;
+}
+a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.links a:hover {
+  color: yellow;
+}
+
+.active {
+  color: yellow;
+  border-bottom: 1px solid yellow;
+}
