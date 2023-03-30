@@ -79,13 +79,16 @@ class MyForm extends React.Component<unknown, StateType> {
 
   validateDeliveryTime() {
     const value = this.deliveryTime.current?.value;
+    const  date=new Date()
+    console.log(date.toLocaleDateString())
+    console.log(value)
     const error = value?.length !== 0 ? true : false;
     this.setState({ deliveryTime: error });
     return error;
   }
   validatePrive() {
     const value = this.price.current?.value;
-    const error = value?.length !== 0 ? true : false;
+    const error = value?.length !== 0&&Number(value)>0 ? true : false;
     this.setState({ price: error });
     return error;
   }
