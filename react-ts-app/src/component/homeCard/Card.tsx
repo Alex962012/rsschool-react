@@ -4,15 +4,12 @@ import classes from "./Card.module.css";
 type MyProps = {
   key: number;
   title: string;
-  description: string;
   price: number;
-  deliveryTime: Date;
-  inputFile: string;
-  selection: string;
-  checkbox: string;
+  image:string
 };
 
 class Card extends React.Component<MyProps> {
+  
   render() {
     return (
       <div className={classes.card}>
@@ -21,7 +18,7 @@ class Card extends React.Component<MyProps> {
         <div>{this.props.price} $</div>
         <div
           className={classes.img}
-          style={{ backgroundImage: `url(${this.props.inputFile})` }}
+          style={{ backgroundImage: `url(${this.props.image})` }}
         ></div>
       </div>
     );
