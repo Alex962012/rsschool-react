@@ -1,18 +1,24 @@
 import React, { forwardRef } from "react";
+import  { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+import { IFormValues } from "../MyForm";
 import classes from "../MyForm.module.css";
-type MyProps = {
-  type: string;
-  text: string;
-  error: boolean;
+
+
+type InputProps = {
+  text: Path<IFormValues>;
+  register: UseFormRegister<IFormValues>;
+  required: boolean;
+  type:string
 };
 
-const InputComponent = forwardRef<HTMLInputElement, MyProps>((props, ref) => (
+
+const InputComponent =({ text, register, required,type }: InputProps)=> (
   <div>
-    <label>{props.text}</label>
-    <input type={props.type} ref={ref} />
+    <label>{text}</label>
+    <input {...register( text, { required })} type={type} />
     <label>
-      {!props.error && <span className={classes.error}>ERORR</span>}
+      {/* {!props.error && <span className={classes.error}>ERORR</span>} */}
     </label>
   </div>
-));
+);
 export default InputComponent;
