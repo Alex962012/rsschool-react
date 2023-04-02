@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
-import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+import React from "react";
+import { FieldError, Path, UseFormRegister } from "react-hook-form";
 import { IFormValues } from "../MyForm";
 import classes from "../MyForm.module.css";
 
@@ -8,7 +8,7 @@ type InputProps = {
   register: UseFormRegister<IFormValues>;
   required: boolean;
   type: string;
-  errors: any;
+  errors: FieldError | undefined;
 };
 
 const InputComponent = ({

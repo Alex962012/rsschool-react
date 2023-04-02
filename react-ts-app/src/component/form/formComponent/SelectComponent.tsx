@@ -1,10 +1,10 @@
-import React, { forwardRef } from "react";
-import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+import React from "react";
+import { UseFormRegister } from "react-hook-form";
 import { IFormValues } from "../MyForm";
 const SelectComponent = React.forwardRef<
   HTMLSelectElement,
   { text: string } & ReturnType<UseFormRegister<IFormValues>>
->(({ text}, ref) => (
+>(({ text }, ref) => (
   <div>
     <label>
       {text}
