@@ -5,7 +5,7 @@ export type CardType = {
   Description: string | undefined;
   DeliveryTime: string | undefined;
   Price: string | undefined;
-  File: any;
+  File: string | undefined;
   Category: string | undefined;
   For: string | undefined;
 };

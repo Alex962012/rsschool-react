@@ -34,7 +34,7 @@ const MyForm = () => {
 
   const onSubmit: SubmitHandler<CardType> = (data) => {
     const file = data.File?.[0];
-    const res = file ? URL.createObjectURL(file) : undefined;
+    const res = file ? URL.createObjectURL(file as unknown as Blob) : undefined;
     data.File = res;
     addCard(data);
     reset();
