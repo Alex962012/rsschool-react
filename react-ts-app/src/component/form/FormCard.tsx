@@ -19,11 +19,10 @@ function FormCard(props: CardType) {
       <div>{props.DeliveryTime}</div>
       <div>{props.Category}</div>
       <div>{props.For}</div>
-      <img
-        className="Card-image"
-        src={URL.createObjectURL(props.File)}
-        alt="card image"
-      />
+      <div
+        className={classes.image}
+        style={{ backgroundImage: `url(${props.File})` }}
+      ></div>
     </div>
   );
 }

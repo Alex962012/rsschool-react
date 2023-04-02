@@ -5,7 +5,7 @@ import InputFileComponent from "./formComponent/InputFileComponent";
 import SelectComponent from "./formComponent/SelectComponent";
 import InputRadioComponent from "./formComponent/InputRadioComponent";
 import FormCard, { CardType } from "./FormCard";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 export interface IFormValues {
   Title: string;
@@ -29,12 +29,12 @@ const MyForm = () => {
   } = useForm<IFormValues>();
 
   const addCard = (card: CardType) => {
-    console.log(card);
     setCards((cards) => [...cards, card]);
   };
 
-  const onSubmit = (data: CardType): void => {
-    const res = data?.File[0] ? URL.createObjectURL(data.File[0]) : "";
+  const onSubmit: SubmitHandler<CardType> = (data) => {
+    const file = data.File?.[0];
+    const res = file ? URL.createObjectURL(file) : undefined;
     data.File = res;
     addCard(data);
     reset();
