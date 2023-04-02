@@ -5,12 +5,12 @@ import InputFileComponent from "./formComponent/InputFileComponent";
 import SelectComponent from "./formComponent/SelectComponent";
 import InputRadioComponent from "./formComponent/InputRadioComponent";
 import FormCard, { CardType } from "./FormCard";
-import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 export interface IFormValues {
   Title: string;
   Description: string;
-  "Receipt time": string;
+  DeliveryTime: string;
   Category: string;
   Price: string;
   "I consent to my personal data": string;
@@ -33,17 +33,13 @@ const MyForm = () => {
     setCards((cards) => [...cards, card]);
   };
 
-  const onSubmit = (data: any) => {
-    // data.File=data.File?.[0] ?URL.createObjectURL((data.File)):undefined
-    const aaa = data.File?.[0] ? URL.createObjectURL(data.File[0]) : undefined;
-    data.File = aaa;
-    console.log(aaa);
+  const onSubmit = (data: CardType): void => {
+    const file = data.File?.[0];
+    const res = file ? URL.createObjectURL(data.File?.[0]) : undefined;
+    data.File = res;
     addCard(data);
-    reset()
+    reset();
   };
-
-  // render() {
-  //   const arr = this.state.cards;
   const newCard = cards.map((el: CardType, index: number) => (
     <FormCard
       key={index}
@@ -53,7 +49,7 @@ const MyForm = () => {
       DeliveryTime={el.DeliveryTime}
       File={el.File}
       Category={el.Category}
-      Checkbox={el.Checkbox}
+      For={el.For}
     />
   ));
   const res = cards.length > 0 ? newCard : "";
@@ -61,18 +57,26 @@ const MyForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-        <InputComponent text="Title" register={register} required type="text" />
+        <InputComponent
+          text="Title"
+          register={register}
+          required
+          type="text"
+          errors={errors.Title}
+        />
         <InputComponent
           text="Description"
           register={register}
           required
           type="text"
+          errors={errors.Description}
         />
         <InputComponent
-          text="Receipt time"
+          text="DeliveryTime"
           register={register}
           required
           type="date"
+          errors={errors.DeliveryTime}
         />
         <SelectComponent text="Category" {...register("Category")} />
         <InputComponent
@@ -80,15 +84,27 @@ const MyForm = () => {
           register={register}
           required
           type="number"
+          errors={errors.Price}
         />
         <InputComponent
           text="I consent to my personal data"
           register={register}
           required
           type="checkbox"
+          errors={errors["I consent to my personal data"]}
         />
-        <InputRadioComponent text="For" register={register} required />
-        <InputFileComponent text="File" register={register} required />
+        <InputRadioComponent
+          text="For"
+          register={register}
+          required
+          errors={errors.For}
+        />
+        <InputFileComponent
+          text="File"
+          register={register}
+          required
+          errors={errors.File}
+        />
         <button type="submit" value="Submit">
           Submit
         </button>

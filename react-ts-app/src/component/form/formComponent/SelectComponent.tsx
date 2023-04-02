@@ -4,16 +4,11 @@ import { IFormValues } from "../MyForm";
 const SelectComponent = React.forwardRef<
   HTMLSelectElement,
   { text: string } & ReturnType<UseFormRegister<IFormValues>>
->(({ onChange, onBlur, name, text }, ref) => (
+>(({ text}, ref) => (
   <div>
     <label>
-      Category
-      <select
-        id="category-select"
-        ref={ref}
-        onChange={onChange}
-        onBlur={onBlur}
-      >
+      {text}
+      <select id="category-select" ref={ref}>
         <option value="cloth">cloth</option>
         <option value="electronics">electronics</option>
         <option value="decorations">decorations</option>

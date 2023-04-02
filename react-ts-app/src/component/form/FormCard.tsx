@@ -5,9 +5,9 @@ export type CardType = {
   Description: string | undefined;
   DeliveryTime: string | undefined;
   Price: string | undefined;
-  File: string | undefined;
+  File:any;
   Category: string | undefined;
-  Checkbox: string | undefined;
+  For:string|undefined
 };
 
 class FormCard extends React.Component<CardType> {
@@ -20,6 +20,7 @@ class FormCard extends React.Component<CardType> {
         <div>{this.props.Price} $</div>
         <div>{this.props.DeliveryTime}</div>
         <div>{this.props.Category}</div>
+        <div>{this.props.For}</div>
         <div
           className={classes.image}
           style={{ backgroundImage: `url(${this.props.File})` }}

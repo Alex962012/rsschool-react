@@ -1,19 +1,30 @@
 import React, { forwardRef } from "react";
 import { Path, UseFormRegister } from "react-hook-form";
 import { IFormValues } from "../MyForm";
-
+import classes from "../MyForm.module.css";
 type InputProps = {
   text: Path<IFormValues>;
   register: UseFormRegister<IFormValues>;
   required: boolean;
+  errors: any;
 };
 
-const InputFileComponent = ({ text, register, required }: InputProps) => (
+const InputFileComponent = ({
+  text,
+  register,
+  required,
+  errors,
+}: InputProps) => (
   <div>
     <label>
       Image:
-      <input type="file" accept="image/jpeg,image/png,image/gif"  {...register(text)} />
+      <input
+        type="file"
+        accept="image/jpeg,image/png,image/gif"
+        {...register(text, { required })}
+      />
     </label>
+    <label>{errors && <span className={classes.error}>ERORR</span>}</label>
   </div>
 );
 export default InputFileComponent;
