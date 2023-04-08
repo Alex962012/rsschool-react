@@ -1,27 +1,33 @@
+import Modal from "../modal/Modal";
 import React from "react";
 import classes from "./Card.module.css";
 
-type MyProps = {
-  key: number;
-  title: string;
-  price: number;
-  image: string;
-};
-
-class Card extends React.Component<MyProps> {
-  render() {
-    return (
-      <div className={classes.card}>
-        <div>{this.props.title}</div>
-        <div>description</div>
-        <div>{this.props.price} $</div>
-        <div
-          className={classes.img}
-          style={{ backgroundImage: `url(${this.props.image})` }}
-        ></div>
-      </div>
-    );
+function Card(props: any) {
+  function openModal() {
+    props.setModalActive(true);
+    props.setModalContent({
+      brand: props.brand,
+      category: props.category,
+      description: props.description,
+      discountPercentage: props.discountPercentage,
+      images: props.images,
+      price: props.price,
+      ratimg: props.ratimg,
+      title: props.title,
+    });
   }
+
+  return (
+    <div className={classes.card} onClick={openModal}>
+      <div>{props.title}</div>
+      <div>description</div>
+      <div>{props.price} $</div>
+      <div
+        className={classes.img}
+        style={{ backgroundImage: `url(${props.images[0]})` }}
+      ></div>
+    </div>
+  );
 }
 
 export default Card;

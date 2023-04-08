@@ -1,14 +1,35 @@
-import React from "react";
+import Modal from "../modal/Modal";
+import React, { useState } from "react";
 import Card from "./Card";
-import cards from "../../Cards.json";
 import classes from "./CardContainer.module.css";
-const cardElement = cards.map((el) => (
-  <Card title={el.title} price={el.price} image={el.image} key={el.id} />
-));
-class CardContainer extends React.Component {
-  render() {
-    return <ul className={classes.cardContainer}>{cardElement}</ul>;
-  }
+
+function CardContainer(props: any) {
+  const [modalActive,setModalActive]=useState(false)
+  const [modalContent,setModalContent]=useState({})
+
+  const cardElement = props.products.map((el: any) => (
+    <Card
+      brand={el.brand}
+      category={el.category}
+      description={el.description}
+      discountPercentage={el.discountPercentage}
+      id={el.id}
+      key={el.id}
+      images={el.images}
+      price={el.price}
+      ratimg={el.ratimg}
+      thumbnail={el.thumbnail}
+      title={el.title}
+      setModalActive={setModalActive}
+      setModalContent={setModalContent}
+    />
+  ));
+  return (
+    <div>
+      <ul className={classes.cardContainer}>{cardElement}</ul>
+      <Modal  active={modalActive} setActive={setModalActive} modalContent={modalContent}></Modal>
+    </div>
+  );
 }
 
 export default CardContainer;
