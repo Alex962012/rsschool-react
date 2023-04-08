@@ -1,6 +1,12 @@
 import React from "react";
+import { setModalContentValues } from "types";
 import classes from "./Modal.module.css";
-function Modal({ active, setActive, modalContent }: any) {
+interface ModalProps {
+  active: boolean;
+  setActive: (value: boolean) => void;
+  modalContent: setModalContentValues;
+}
+function Modal({ active, setActive, modalContent }: ModalProps) {
   return (
     <div
       className={active ? classes.active + " " + classes.modal : classes.modal}
@@ -16,7 +22,7 @@ function Modal({ active, setActive, modalContent }: any) {
         <div className="">Price:{modalContent.price}$</div>
         <div className={classes.imagesContainer}>
           {modalContent.images
-            ? modalContent.images.map((el: any, index: number) => (
+            ? modalContent.images.map((el: string, index: number) => (
                 <div
                   className={classes.image}
                   style={{ backgroundImage: `url(${el})` }}

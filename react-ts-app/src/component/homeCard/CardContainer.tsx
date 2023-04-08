@@ -2,12 +2,13 @@ import Modal from "../modal/Modal";
 import React, { useState } from "react";
 import Card from "./Card";
 import classes from "./CardContainer.module.css";
+import { CardContainerProps, Product } from "../../types";
 
-function CardContainer(props: any) {
-  const [modalActive,setModalActive]=useState(false)
-  const [modalContent,setModalContent]=useState({})
+function CardContainer(props: CardContainerProps) {
+  const [modalActive, setModalActive] = useState(false);
+  const [modalContent, setModalContent] = useState({});
 
-  const cardElement = props.products.map((el: any) => (
+  const cardElement = props.products.map((el: Product) => (
     <Card
       brand={el.brand}
       category={el.category}
@@ -27,7 +28,11 @@ function CardContainer(props: any) {
   return (
     <div>
       <ul className={classes.cardContainer}>{cardElement}</ul>
-      <Modal  active={modalActive} setActive={setModalActive} modalContent={modalContent}></Modal>
+      <Modal
+        active={modalActive}
+        setActive={setModalActive}
+        modalContent={modalContent}
+      ></Modal>
     </div>
   );
 }

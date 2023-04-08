@@ -10,8 +10,12 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+    cursor: pointer;
 }
-
+.card:hover{
+    transform: scale(1.01);
+    border: 1px solid gray;
+}
 .img{
     margin-top: 20px;
     width: 50px;

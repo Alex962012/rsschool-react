@@ -1,8 +1,7 @@
-import Modal from "../modal/Modal";
 import React from "react";
 import classes from "./Card.module.css";
-
-function Card(props: any) {
+import CardType from "../../types";
+function Card(props: CardType) {
   function openModal() {
     props.setModalActive(true);
     props.setModalContent({

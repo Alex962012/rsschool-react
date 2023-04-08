@@ -1,13 +1,17 @@
 import axiosInstance from "../../api";
-import React, { useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import classes from "./SearchBar.module.css";
 import { AxiosResponse } from "axios";
-import { GET200_Products, Product } from "types";
+import { GET200_Products } from "types";
+import { Product } from "../../types";
+interface SearchBarProps {
+  products: Array<Product>;
+  setProducts: (value: Array<Product>) => void;
+}
 
-const SearchBar = (props: any) => {
+const SearchBar = (props: SearchBarProps) => {
   const inputValue = useRef(localStorage.getItem("value") || "");
   const [string, setString] = useState(inputValue.current);
-  const [isLoading, SetIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     localStorage.setItem("value", `${inputValue.current}`);
@@ -17,7 +21,8 @@ const SearchBar = (props: any) => {
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setString(e.target.value);
   };
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent) => {
+    console.log(e);
     e.preventDefault;
     try {
       const response: AxiosResponse<GET200_Products> = await axiosInstance.get(
