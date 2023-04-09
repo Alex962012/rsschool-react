@@ -1,38 +1,28 @@
-import axiosInstance from "../../api";
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import classes from "./SearchBar.module.css";
-import { AxiosResponse } from "axios";
-import { GET200_Products } from "types";
+
 import { Product } from "../../types";
 interface SearchBarProps {
   products: Array<Product>;
   setProducts: (value: Array<Product>) => void;
+  inputValue: { current: string };
+  responseProduct: () => void;
 }
 
 const SearchBar = (props: SearchBarProps) => {
-  const inputValue = useRef(localStorage.getItem("value") || "");
-  const [string, setString] = useState(inputValue.current);
+  const [string, setString] = useState(props.inputValue.current);
 
   useEffect(() => {
-    localStorage.setItem("value", `${inputValue.current}`);
-    inputValue.current = string;
+    localStorage.setItem("value", `${props.inputValue.current}`);
+    props.inputValue.current = string;
   });
 
   const changeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setString(e.target.value);
   };
-  const handleSubmit = async (e: FormEvent) => {
-    console.log(e);
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault;
-    try {
-      const response: AxiosResponse<GET200_Products> = await axiosInstance.get(
-        `search?q=${string}`
-      );
-      props.setProducts(response.data.products);
-    } catch (e) {
-      console.error(e);
-    } finally {
-    }
+    props.responseProduct();
   };
 
   return (
@@ -40,7 +30,7 @@ const SearchBar = (props: SearchBarProps) => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Enter for example an apple... "
           value={string}
           onChange={changeInput}
           className={classes.input}

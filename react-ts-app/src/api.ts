@@ -1,8 +1,12 @@
-import axios from "axios";
+import { Product } from "types";
+export const searchProduct = async (string: string): Promise<Product[]> => {
+  const res = await fetch(`https://dummyjson.com/products/search?q=${string}`);
+  const data = await res.json();
+  return data.product;
+};
 
-const axiosInstance = axios.create({
-  baseURL: "https://dummyjson.com/products",
-  timeout: 5000,
-  headers: { "X-Custom-Header": "foobar" },
-});
-export default axiosInstance;
+export const allProduct = async () => {
+  const res = await fetch(`https://dummyjson.com/products/`);
+  const data = await res.json();
+  return data;
+};
