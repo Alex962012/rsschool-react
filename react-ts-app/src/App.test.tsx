@@ -6,8 +6,7 @@ import React from "react";
 import About from "./pages/About";
 import Form from "./pages/Form";
 
-import FormCard, { CardType } from "./component/form/FormCard";
-
+import FormCard from "./component/form/FormCard";
 
 describe("App", () => {
   it("Renders hello world", () => {
@@ -50,30 +49,32 @@ describe("Form", () => {
     render(<Form />);
     expect(screen.getByText("Form")).toBeInTheDocument();
   });
-  
 });
 
-
-const Card={
-  key:1,
-  Title:'Title',
-  Description:' Description',
-  DeliveryTime:'DeliveryTime',
-  Price:"Price",
-  File: 'string',
-  Category: 'string',
-  For: 'string'
-}
+const Card = {
+  key: 1,
+  Title: "Title",
+  Description: " Description",
+  DeliveryTime: "DeliveryTime",
+  Price: "Price",
+  File: "string",
+  Category: "string",
+  For: "string",
+};
 describe("FormCard", () => {
   it("About renders", () => {
-    render(<FormCard  key={Card.key}
-      Title={Card.Title}
-      Description={Card.Description}
-      Price={Card.Price}
-      DeliveryTime={Card.DeliveryTime}
-      File={Card.File}
-      Category={Card.Category}
-      For={Card.For}/>);
+    render(
+      <FormCard
+        key={Card.key}
+        Title={Card.Title}
+        Description={Card.Description}
+        Price={Card.Price}
+        DeliveryTime={Card.DeliveryTime}
+        File={Card.File}
+        Category={Card.Category}
+        For={Card.For}
+      />
+    );
     expect(screen.getByText("Title")).toBeInTheDocument();
   });
 });
