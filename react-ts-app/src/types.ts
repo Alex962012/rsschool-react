@@ -6,7 +6,7 @@ export interface Product {
   id: number;
   images: Array<string>;
   price: number;
-  ratimg: undefined;
+  rating: number;
   thumbnail: string;
   title: string;
 }
@@ -17,7 +17,7 @@ export interface setModalContentValues {
   discountPercentage?: number;
   images?: Array<string>;
   price?: number;
-  ratimg?: undefined;
+  rating?: number;
   title?: string;
 }
 
@@ -29,7 +29,7 @@ export default interface CardType {
   id: number;
   images: Array<string>;
   price: number;
-  ratimg: undefined;
+  rating: number;
   thumbnail: string;
   title: string;
   setModalContent: ({}: setModalContentValues) => void;

@@ -18,7 +18,7 @@ function CardContainer(props: CardContainerProps) {
       key={el.id}
       images={el.images}
       price={el.price}
-      ratimg={el.ratimg}
+      rating={el.rating}
       thumbnail={el.thumbnail}
       title={el.title}
       setModalActive={setModalActive}

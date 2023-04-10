@@ -21,7 +21,7 @@ const SearchBar = (props: SearchBarProps) => {
     setString(e.target.value);
   };
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault;
+    e.preventDefault();
     props.responseProduct();
   };
 

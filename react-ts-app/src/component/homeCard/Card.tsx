@@ -11,7 +11,7 @@ function Card(props: CardType) {
       discountPercentage: props.discountPercentage,
       images: props.images,
       price: props.price,
-      ratimg: props.ratimg,
+      rating: props.rating,
       title: props.title,
     });
   }

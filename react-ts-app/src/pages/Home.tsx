@@ -16,7 +16,7 @@ function Home() {
         const data = await searchProduct(inputValue.current);
         setProducts(data);
         setIsLoading(false);
-        console.log(data);
+
         if (data.length === 0) {
           alert("not ofund");
           setIsLoading(false);
@@ -27,6 +27,7 @@ function Home() {
     } else {
       try {
         const data = await allProduct();
+        console.log(data);
         setProducts(data.products);
         setIsLoading(false);
       } catch (e) {

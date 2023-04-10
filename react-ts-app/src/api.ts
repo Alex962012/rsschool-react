@@ -1,7 +1,7 @@
-import { Product } from "types";
-export const searchProduct = async (string: string): Promise<Product[]> => {
+export const searchProduct = async (string: string) => {
   const res = await fetch(`https://dummyjson.com/products/search?q=${string}`);
   const data = await res.json();
+  console.log(data.products);
   return data.products;
 };
 
