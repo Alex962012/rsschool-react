@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import InputComponent from "./formComponent/InputComponent";
 import classes from "./MyForm.module.css";
 import InputFileComponent from "./formComponent/InputFileComponent";
@@ -6,6 +6,8 @@ import SelectComponent from "./formComponent/SelectComponent";
 import InputRadioComponent from "./formComponent/InputRadioComponent";
 import FormCard, { CardType } from "./FormCard";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { updateForm } from "../../store/formSlice";
 
 export interface IFormValues {
   Title: string;
@@ -19,8 +21,6 @@ export interface IFormValues {
 }
 
 const MyForm = () => {
-  const cardtype: CardType[] = [];
-  const [cards, setCards] = useState(cardtype);
   const {
     register,
     formState: { errors },
@@ -28,15 +28,14 @@ const MyForm = () => {
     reset,
   } = useForm<IFormValues>();
 
-  const addCard = (card: CardType) => {
-    setCards((cards) => [...cards, card]);
-  };
+  const dispatch = useAppDispatch();
 
+  const cards = useAppSelector((state) => state.form);
   const onSubmit: SubmitHandler<CardType> = (data) => {
     const file = data.File?.[0];
     const res = file ? URL.createObjectURL(file as unknown as Blob) : undefined;
     data.File = res;
-    addCard(data);
+    dispatch(updateForm(data));
     reset();
   };
   const newCard = cards.map((el: CardType, index: number) => (
