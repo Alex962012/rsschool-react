@@ -1,28 +1,22 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import classes from "./SearchBar.module.css";
+import { updateString } from "../../store/searchSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
 
-import { Product } from "../../types";
-interface SearchBarProps {
-  products: Array<Product>;
-  setProducts: (value: Array<Product>) => void;
-  inputValue: { current: string };
-  responseProduct: () => void;
-}
+const SearchBar = () => {
+  const sString = useAppSelector((state) => state.string.string);
+  const [string, setString] = useState(sString);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
 
-const SearchBar = (props: SearchBarProps) => {
-  const [string, setString] = useState(props.inputValue.current);
-
-  useEffect(() => {
-    localStorage.setItem("value", `${props.inputValue.current}`);
-    props.inputValue.current = string;
-  });
-
-  const changeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setString(e.target.value);
-  };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    props.responseProduct();
+    const input = inputRef.current!.value;
+    dispatch(updateString(input));
+  };
+
+  const changeInput = () => {
+    inputRef.current && setString(inputRef.current.value);
   };
 
   return (
@@ -34,6 +28,7 @@ const SearchBar = (props: SearchBarProps) => {
           value={string}
           onChange={changeInput}
           className={classes.input}
+          ref={inputRef}
         />
         <button className={classes.button} type="submit">
           submit
